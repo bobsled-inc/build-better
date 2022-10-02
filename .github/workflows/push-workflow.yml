@@ -16,4 +16,5 @@ jobs:
         run: sudo apt install btrfs-progs -y
       - name: List blks
         run: lsblk -e7
-
+      - name: make btrfs partition
+        run: mkfs.btrfs -L fastspace /dev/sdb1
