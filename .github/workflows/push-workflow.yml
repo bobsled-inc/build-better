@@ -13,8 +13,8 @@ jobs:
     defaults:
       run:
         working-directory: /mnt
-      env:
-        GITHUB_WORKSPACE: /mnt
+    env:
+      GITHUB_WORKSPACE: /mnt
     steps:
       - name: chown
         run: sudo chmod 777 /mnt
