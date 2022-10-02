@@ -25,7 +25,7 @@ jobs:
       - name: clear
         run: sudo rm -rf /mnt/*
       - name: shrink
-        run: sudo parted --script /dev/sda resizepart 1 yes 100%
+        run: sudo parted --script /dev/sda resizepart 1 yes 50%
       - name: unmount
         run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
       - name: make dir
