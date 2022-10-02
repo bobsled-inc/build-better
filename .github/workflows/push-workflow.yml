@@ -27,7 +27,7 @@ jobs:
       - name: unmount
         run: sudo umount /mnt
       - name: shrink
-        run: sudo echo -e "yes\n5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
+        run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
       - name: unmount
         run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
       - name: make dir
