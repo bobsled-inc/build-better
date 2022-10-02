@@ -24,6 +24,8 @@ jobs:
         run: sudo swapoff /mnt/swapfile
       - name: clear
         run: sudo rm -rf /mnt/*
+      - name: shrink
+        run: sudo parted ---pretend-input-tty /dev/sda resizepart 2 yes 100%
       - name: unmount
         run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
       - name: make dir
