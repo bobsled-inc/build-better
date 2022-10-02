@@ -17,7 +17,11 @@ jobs:
       GITHUB_WORKSPACE: /mnt
     steps:
       - name: chown
-        run: sudo chmod 777 /mnt
+        run: | 
+        sudo chmod 777 /mnt
+        dd if=/dev/zero of=/mnt/btrfs.image bs=1M count=4096
+        mkfs.btrfs /mnt/btrfs.image
+        mount -o loop /mnt/btrfs.image ${GITHUB_WORKSPACE}
       - uses: actions/checkout@v3
       - name: copy Git Checkout
         run: |
@@ -33,31 +37,31 @@ jobs:
         run: df --print-type
       - name: ls
         run: ls -a /mnt
-      - name: mnt test 2
-        run: sudo dd if=/dev/zero of=/mnt/test2.img bs=512 count=1000 oflag=dsync
-      - name: cwd test 2
-        run: sudo dd if=/dev/zero of=$(pwd)/test2.img bs=512 count=1000 oflag=dsync
-      - name: swapoff
-        run: sudo swapoff /mnt/swapfile
-      - name: clear
-        run: sudo rm -rf /mnt/*
-      - name: loopback
-        run: sudo losetup -la
-      - name: loopback
-        run: sudo losetup -la
-      - name: unmount
-        run: sudo bash -c 'umount /dev/sdb1 && wipefs -a /dev/sdb'
-      - name: wipe
-        run: sudo bash -c 'partprobe -s && lsblk -e7 && fdisk -l'
-      - name: shrink
-        run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
-      - name: partprobe
-        run: sudo bash -c 'partprobe -s && blockdev --rereadpt /dev/sdb'
-      #- name: unmount
-      #  run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
-      - name: mknew
-        run: sudo mkfs.btrfs -f /dev/sdb1
-      - name: make dir
-        run: sudo mkdir -v /fastspace
-      - name: mount
-        run: sudo mount /dev/sdb1 /fastspace
+      # - name: mnt test 2
+      #   run: sudo dd if=/dev/zero of=/mnt/test2.img bs=512 count=1000 oflag=dsync
+      # - name: cwd test 2
+      #   run: sudo dd if=/dev/zero of=$(pwd)/test2.img bs=512 count=1000 oflag=dsync
+      # - name: swapoff
+      #   run: sudo swapoff /mnt/swapfile
+      # - name: clear
+      #   run: sudo rm -rf /mnt/*
+      # - name: loopback
+      #   run: sudo losetup -la
+      # - name: loopback
+      #   run: sudo losetup -la
+      # - name: unmount
+      #   run: sudo bash -c 'umount /dev/sdb1 && wipefs -a /dev/sdb'
+      # - name: wipe
+      #   run: sudo bash -c 'partprobe -s && lsblk -e7 && fdisk -l'
+      # - name: shrink
+      #   run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
+      # - name: partprobe
+      #   run: sudo bash -c 'partprobe -s && blockdev --rereadpt /dev/sdb'
+      # #- name: unmount
+      # #  run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
+      # - name: mknew
+      #   run: sudo mkfs.btrfs -f /dev/sdb1
+      # - name: make dir
+      #   run: sudo mkdir -v /fastspace
+      # - name: mount
+      #   run: sudo mount /dev/sdb1 /fastspace
