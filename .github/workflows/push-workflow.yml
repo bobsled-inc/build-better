@@ -20,12 +20,18 @@ jobs:
         run: df --print-type
       - name: ls
         run: ls -a /mnt
+      - name: mnt test 2
+        run: dd if=/dev/zero of=/mnt/test2.img bs=512 count=1000 oflag=dsync
+      - name: cwd test 2
+        run: dd if=/dev/zero of=$(pwd)/test2.img bs=512 count=1000 oflag=dsync
       - name: swapoff
         run: sudo swapoff /mnt/swapfile
       - name: clear
         run: sudo rm -rf /mnt/*
       - name: loopback
-        run: sudo losetup
+        run: sudo losetup -la
+      - name: loopback
+        run: sudo losetup -la
       - name: unmount
         run: sudo bash -c 'umount /dev/sdb1 && wipefs -a /dev/sdb'
       - name: wipe
