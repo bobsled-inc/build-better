@@ -1,0 +1,16 @@
+name: push-workflow
+
+on:
+  push:
+    branches:
+      - "*"
+      - "!gh-readonly-queue/*"
+  merge_group:
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Configure btrfs
+        run: sudo apt install btrfs-progs -y
