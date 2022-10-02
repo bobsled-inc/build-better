@@ -19,4 +19,4 @@ jobs:
       - name: what is there now
         run: df --print-type
       - name: make btrfs partition
-        run: mkfs.btrfs -L fastspace /dev/sdb1
+        run: mkfs.btrfs -f -L fastspace /dev/sdb1
