@@ -21,7 +21,7 @@ jobs:
           sudo chmod 777 /mnt
           dd if=/dev/zero of=/mnt/btrfs.image bs=1M count=4096
           mkfs.btrfs /mnt/btrfs.image
-          mount -o loop /mnt/btrfs.image ${GITHUB_WORKSPACE}
+          sudo mount -o loop /mnt/btrfs.image "${GITHUB_WORKSPACE}""
       - uses: actions/checkout@v3
       - name: copy Git Checkout
         run: |
