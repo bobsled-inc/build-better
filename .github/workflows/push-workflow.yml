@@ -24,3 +24,7 @@ jobs:
         run: sudo umount /mnt
       - name: make btrfs partition
         run: sudo mkfs.btrfs -f -L fastspace /dev/sdb1
+      - name: make dir
+        run: sudo mkdir -v /fastspace
+      - name: mount
+        run: sudo mount /dev/sdb1 /fastspace
