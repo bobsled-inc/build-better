@@ -18,5 +18,9 @@ jobs:
         run: lsblk -e7
       - name: what is there now
         run: df --print-type
+      - name: ls
+        run: ls -a /mnt
+      - name: unmount
+        run: sudo umount /mnt
       - name: make btrfs partition
         run: sudo mkfs.btrfs -f -L fastspace /dev/sdb1
