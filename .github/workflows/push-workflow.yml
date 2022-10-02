@@ -33,7 +33,7 @@ jobs:
       #- name: unmount
       #  run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
       - name: mknew
-        run: mkfs.btrfs -f /dev/sdb1
+        run: sudo mkfs.btrfs -f /dev/sdb1
       - name: make dir
         run: sudo mkdir -v /fastspace
       - name: mount
