@@ -28,8 +28,10 @@ jobs:
         run: sudo umount /mnt
       - name: shrink
         run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
-      - name: unmount
-        run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
+      #- name: unmount
+      #  run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
+      - name: mknew
+        run: mkfs.btrfs -f /dev/sdb2
       - name: make dir
         run: sudo mkdir -v /fastspace
       - name: mount
