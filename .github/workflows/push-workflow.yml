@@ -10,7 +10,14 @@ on:
 jobs:
   install:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: /mnt
+      env:
+        GITHUB_WORKSPACE: /mnt
     steps:
+      - uses: chown
+        run: sudo chmod 777 /mnt
       - uses: actions/checkout@v3
       - name: Configure btrfs
         run: sudo apt install btrfs-progs -y
