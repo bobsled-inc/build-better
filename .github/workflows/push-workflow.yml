@@ -28,6 +28,8 @@ jobs:
         run: sudo umount /dev/sdb1
       - name: wipe
         run: sudo wipefs -af /dev/sdb
+      - name: now what
+        run: sudo bash -c 'partprobe -s && lsblk -e7 && fdisk -l'
       - name: shrink
         run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
       - name: partprobe
