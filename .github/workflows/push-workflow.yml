@@ -25,9 +25,9 @@ jobs:
       - name: clear
         run: sudo rm -rf /mnt/*
       - name: unmount
-        run: sudo umount /mnt
+        run: sudo umount /dev/sdb*
       - name: wipe
-        run: sudo lsof /dev/sdb1
+        run: sudo wipefs -af /dev/sdb
       - name: shrink
         run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
       - name: partprobe
