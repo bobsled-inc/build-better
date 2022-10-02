@@ -19,6 +19,10 @@ jobs:
       - name: chown
         run: sudo chmod 777 /mnt
       - uses: actions/checkout@v3
+      - name: copy Git Checkout
+        run: |
+          cp -r "${GITHUB_WORKSPACE}"/* ./
+          cp -r "${GITHUB_WORKSPACE}"/.* ./
       - name: Configure btrfs
         run: sudo apt install btrfs-progs -y
       - name: List blks
