@@ -26,10 +26,12 @@ jobs:
         run: sudo rm -rf /mnt/*
       - name: unmount
         run: sudo umount /mnt
+      - name: wipe
+        run: sudo wipefs -a /dev/sdb
       - name: shrink
         run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
       - name: partprobe
-        run: sudo bash -c 'partprobe && blockdev --rereadpt /dev/sdb'
+        run: sudo bash -c 'partprobe -s && blockdev --rereadpt /dev/sdb'
       #- name: unmount
       #  run: sudo bash -c 'umount /mnt && lsblk -e7 && fdisk -l && cat /proc/swaps && mkfs.btrfs -f /dev/sdb1'
       - name: mknew
