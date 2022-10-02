@@ -25,10 +25,8 @@ jobs:
       - name: clear
         run: sudo rm -rf /mnt/*
       - name: unmount
-        run: sudo umount /dev/sdb1
+        run: sudo bash -c 'umount /dev/sdb1 && wipefs -a /dev/sdb'
       - name: wipe
-        run: sudo wipefs -af /dev/sdb
-      - name: now what
         run: sudo bash -c 'partprobe -s && lsblk -e7 && fdisk -l'
       - name: shrink
         run: sudo echo -e "5G\nyes" | sudo parted /dev/sdb ---pretend-input-tty resizepart 1
