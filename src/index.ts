@@ -6,7 +6,12 @@ export const greeting: Greeting = {
   occasion: "New Year",
 };
 
-export const generateGreeting = (greetee: string, greeter: string): Greeting => ({
+export const generateGreeting = (
+  greetee: string,
+  greeter: string,
+  occasion: string
+): Greeting => ({
   greetee,
-  greeter
+  greeter,
+  occasion,
 });
