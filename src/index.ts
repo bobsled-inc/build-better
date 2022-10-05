@@ -5,3 +5,13 @@ export const greeting: Greeting = {
   greeter: "Krzysztof",
   occasion: "New Year",
 };
+
+export const generateGreeting = (
+  greetee: string,
+  greeter: string,
+  occasion: string
+): Greeting => ({
+  greetee,
+  greeter,
+  occasion,
+});
